@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+    <div class="row">
+        <h1 style="text-align: center">Create a New Match</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/matches" method="POST">
+                <div class="form-group">
+                    <label for="champion">Champion Played</label>
+                    <input class="form-control" type="text" name="champion" id="champion" placeholder="Champion">
+                </div>
+                <div class="form-group">
+                    <label for="opponent">Opponent</label>
+                    <input class="form-control" type="text" name="opponent" id="opponent" placeholder="Opponent">
+                </div>
+                <div class="form-group">
+                    <label for="kills">Kills</label>
+                    <input class="form-control" type="number" name="kills" id="kill" placeholder="0" step="1" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="deaths">Deaths</label>
+                    <input class="form-control" type="number" name="deaths" id="deaths" placeholder="0" step="1" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="assists">Assists</label>
+                    <input class="form-control" type="number" name="assists" id="assists" placeholder="0" step="1" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="build">Built Items (separate by spaces)</label>
+                    <input class="form-control" type="text" name="build" id="build" placeholder="Build Items">
+                </div>
+                <div class="form-group">
+                    <label for="build">Result</label>
+                    <select class="form-controler" name="result" id="result" placeholder="result">
+                        <option value="W">Win</option>
+                        <option value="L">Loss</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/">Go Back</a>
+        </div>
+    </div>
+<% include ../partials/footer %>
+

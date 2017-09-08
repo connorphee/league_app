@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<table>
+	<tr>
+		<th>Champion</th> <th>Opponent</th><th>Wins</th><th>Losses</th><th>Win Rate</th><th>KDA</th>
+	</tr>
+	<% for (var i = 0; i < matchups.length; i++) { %>
+    <tr>
+      <td><%= matchups[i].champion %></td>
+      <td><%= matchups[i].opponent %></td>
+      <td><%= matchups[i].wins %></td>
+      <td><%= matchups[i].losses %></td>
+      <td><%= (matchups[i].wins / matchups[i].gameCount) * 100 %>% </td>
+      <td><%= Math.round((matchups[i].kills + matchups[i].assists) / Math.max(1,matchups[i].deaths) * 100) / 100 %>
+    </tr>    
+   <% } %>
+</table>
+
+<% include ../partials/footer %>

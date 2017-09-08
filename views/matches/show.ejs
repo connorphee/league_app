@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+
+<table>
+	<tr>
+		<th>Champion</th><th>Opponent</th><th>Kills</th><th>Deaths</th><th>Assists</th><th>Build</th><th>W / L</th>
+	</tr>
+	<% for (var i = 0; i < matches.length; i++) { %>
+    <tr>
+      <td><%= matches[i].champion %></td>
+      <td><%= matches[i].opponent %></td>
+      <td><%= matches[i].kills %></td>
+      <td><%= matches[i].deaths %></td>
+      <td><%= matches[i].assists %></td>
+      <td><%= matches[i].build %></td>
+      <td><%= matches[i].result %></td>
+    </tr>    
+   <% } %>
+</table>
