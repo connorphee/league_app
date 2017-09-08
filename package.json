@@ -9,6 +9,8 @@
   "author": "Connor Phee",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.4"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.10"
   }
 }
