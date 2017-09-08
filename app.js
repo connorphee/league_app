@@ -20,7 +20,7 @@ const   matchRoutes = require("./routes/matches"),
         indexRoutes      = require("./routes/index"),
         matchupRoutes = require("./routes/matchups");
     
-mongoose.connect('mongodb://admin:admin@ds011725.mlab.com:11725/league-app');
+mongoose.connect(process.env.DB_URL);
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -32,7 +32,7 @@ app.use(cookieParser('secret'));
 app.locals.moment = require('moment');
 
 app.use(require("express-session")({
-    secret: "I love that wildog",
+    secret: process.env.APP_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {_expires: 600000}
