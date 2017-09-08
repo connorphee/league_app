@@ -20,7 +20,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
       console.log(err);
     } else {
       const info = req;
-      const matchup = info.body.champion + 'V' + info.body.opponent;
+      const matchup = info.body.champion.toUpperCase() + 'V' + info.body.opponent.toUpperCase();
       const username = info.user.username;
       match.author.id = info.user._id;
       match.author.username = info.user.username;
