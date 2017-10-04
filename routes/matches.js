@@ -22,47 +22,62 @@ router.post("/", middleware.isLoggedIn, function(req, res){
       const info = req;
       const matchup = info.body.champion.toUpperCase() + 'V' + info.body.opponent.toUpperCase();
       const username = info.user.username;
-      match.author.id = info.user._id;
-      match.author.username = info.user.username;
-      match.champion = info.body.champion;
-      match.opponent = info.body.opponent;
-      match.kills = info.body.kills;
-      match.deaths = info.body.deaths;
-      match.assists = info.body.assists;
-      match.build = info.body.build.split(',');
-      match.result = info.body.result;
+      match = buildMatchObject(match, info);
       match.save();
+      updateMatchup(username, matchup, info);
 
-      Matchup.findOne({matchup : matchup, username : username}, function(err, document) {
-        if (document) {
-          document.gameCount++;
-          info.body.result === 'W' ? document.wins++ :  document.losses++;
-          document.kills += parseInt(info.body.kills);
-          document.deaths += parseInt(info.body.deaths);
-          document.assists += parseInt(info.body.assists);
-          document.save();
-        } else {
-          Matchup.create({"name": "hello"}, function(err, document) {
-            if (err) throw err;
-            
-            document.matchup = matchup;
-            document.gameCount = 1;
-            document.username = info.user.username;
-            document.champion = info.body.champion;
-            document.opponent = info.body.opponent;
-            document.wins = info.body.result === 'W' ? 1 : 0;
-            document.losses = info.body.result === 'L' ? 1 : 0;
-            document.kills = info.body.kills;
-            document.deaths = info.body.deaths;
-            document.assists = info.body.assists;
-            document.save();
-          });
-        }
-      });
       req.flash('success', 'Created a match!');
       res.redirect('/');
     }
   });
 });
+
+function buildMatchObject (match, values) {
+  match.author.id = values.user._id;
+  match.author.username = values.user.username;
+  match.champion = values.body.champion;
+  match.opponent = values.body.opponent;
+  match.kills = values.body.kills;
+  match.deaths = values.body.deaths;
+  match.assists = values.body.assists;
+  match.build = values.body.build.split(',');
+  match.result = values.body.result;
+
+  return match;
+}
+
+function buildMatchupObject (matchup, values) {
+  matchup.gameCount = 1;
+  matchup.username = values.user.username;
+  matchup.champion = values.body.champion;
+  matchup.opponent = values.body.opponent;
+  matchup.wins = values.body.result === 'W' ? 1 : 0;
+  matchup.losses = values.body.result === 'L' ? 1 : 0;
+  matchup.kills = values.body.kills;
+  matchup.deaths = values.body.deaths;
+  matchup.assists = values.body.assists;
+
+  return matchup;
+}
+
+function updateMatchup (username, matchup, values) {
+  Matchup.findOne({matchup : matchup, username : username}, function(err, document) {
+    if (document) {
+      document.gameCount++;
+      values.body.result === 'W' ? document.wins++ :  document.losses++;
+      document.kills += parseInt(values.body.kills);
+      document.deaths += parseInt(values.body.deaths);
+      document.assists += parseInt(values.body.assists);
+      document.save();
+    } else {
+      Matchup.create({"name": "hello"}, function(err, document) {
+        if (err) throw err;
+        buildMatchupObject(document, values);
+        document.matchup = matchup;
+        document.save();
+      });
+    }
+  });
+}
 
 module.exports = router;
