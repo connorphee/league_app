@@ -22,6 +22,20 @@ router.get("/reset", function(req, res){
   res.render("reset", {page: 'reset'});
 })
 
+router.post("/reset", function(req, res){
+  const username  = req.body.username,
+        email     = req.body.email
+  // check if username && email exist
+  User.findOne({$and:[{username:username}, {email:email}]}, function(err, found){
+    // TODO: beautify error message
+    if(found){
+      res.send('<h2> Success! </h2> <p> A reset link sent to <strong>' + email + '</strong>. Please click the url to activate your new password </p> <meta http-equiv="refresh" content="3;url=./login" />');
+    } else {
+      res.send('<h3> Username or email not found! </h3> <p> Redirecting to login page... </p> <meta http-equiv="refresh" content="3;url=./login" />');
+    }
+  })
+})
+
 //handle sign up logic
 router.post("/register", function(req, res){
     var newUser = new User({username: req.body.username, email: req.body.email});
