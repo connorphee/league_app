@@ -7,8 +7,8 @@ var User = require("../models/user");
 // TODO: separate config file
 const email= require('emailjs/email'),
 server = email.server.connect({
-    user: 'winistein@gmail.com',
-    password: 'W1LD4N5N',
+    user: 'username@gmail.com',
+    password: 'password',
     host: 'smtp.gmail.com',
     ssl: true
 });
@@ -93,7 +93,7 @@ router.get("/account/resetpass/:link", function(req, res){
   User.findOne({reset_link:link},function(err, found){
     if(found){
       // change hash+salt password based on reset_pass
-      // 
+      // BUG: how to hash and salt reset_pass?
     } else {
       res.send('Sorry, your link is invalid');
     }
