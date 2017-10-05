@@ -5,7 +5,7 @@ var Matchup = require('../models/matchup');
 var middleware = require("../middleware");
 
 router.get("/new", middleware.isLoggedIn, function(req, res){
-   res.render("matches/new"); 
+   res.render("matches/new");
 });
 
 router.get("/", middleware.isLoggedIn, function(req, res) {
