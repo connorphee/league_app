@@ -14,8 +14,13 @@ router.get("/", function(req, res){
 
 // show register form
 router.get("/register", function(req, res){
-   res.render("register", {page: 'register'}); 
+   res.render("register", {page: 'register'});
 });
+
+// show reset password page
+router.get("/reset", function(req, res){
+  res.render("reset", {page: 'reset'});
+})
 
 //handle sign up logic
 router.post("/register", function(req, res){
@@ -27,18 +32,18 @@ router.post("/register", function(req, res){
         }
         passport.authenticate("local")(req, res, function(){
            req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
-           res.redirect("/matches"); 
+           res.redirect("/matches");
         });
     });
 });
 
 //show login form
 router.get("/login", function(req, res){
-   res.render("login", {page: 'login'}); 
+   res.render("login", {page: 'login'});
 });
 
 //handling login logic
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
     {
         successRedirect: "/matches",
         failureRedirect: "/login",
