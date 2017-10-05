@@ -32,7 +32,7 @@ app.use(cookieParser('secret'));
 app.locals.moment = require('moment');
 
 app.use(require("express-session")({
-    secret: process.env.APP_SECRET,
+    secret: 'Every person you meet knows something you don\'t',
     resave: false,
     saveUninitialized: false,
     cookie: {_expires: 600000}

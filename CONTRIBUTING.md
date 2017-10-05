@@ -1,11 +1,14 @@
 # Contributing (WIP)
 
+When contributing to this repository, please first discuss the change you wish to make via issue,
+email, or any other method with the owners of this repository before making a change. 
+
 ## Setup
 
 To set this project up locally:
 * Fork the project
-* `git clone [your forked repo url]`
-* `cd [new directory]`
+* `git clone <your github username>/league-app`
+* `cd league-app`
 * `npm i`
 
 You must also have a local MongoDB instance, the directions to install this can be found here:
@@ -16,7 +19,10 @@ Once you have a local MongoDB instance, you must then either replace the
 
 `process.env.DB_URL`
 
-parameter with your DB url, or create a matching env variable locally.
+parameter with your DB url, or create a .env file in the root of your project and place your DB url there like this:
+
+
+`DB_URL=mongodb://<your-local-connection-here>`
 
 Once this is done, you should be able to run 
 
