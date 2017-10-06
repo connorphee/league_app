@@ -4,6 +4,7 @@
   "description": "LOL matchup tracking",
   "main": "app.js",
   "scripts": {
+    "eslint": "eslint --ext=js ./routes ./models ./middleware",
     "start": "node app.js"
   },
   "author": "Connor Phee",
