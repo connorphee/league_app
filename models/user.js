@@ -30,5 +30,8 @@ UserSchema.pre('save', function (next) {
     });
 });
 
+UserSchema.plugin(passportLocalMongoose, {
+    usernameQueryFields: ["email"]
+});
 
 module.exports = mongoose.model(userModelName, UserSchema);
