@@ -6,7 +6,7 @@ in a better way using something outside of the stack in this project, feel free 
 means tied down to Node/Express/EJS etc.. We just want to create the best stuff we can!
 
 ## Before you create a PR…
-Please [create an issue](https://github.com/svinkle/launchy/issues) first to discuss your idea with the maintainer(s). After we've chatted things through, go ahead with your work and send over a PR.
+Please [create an issue](https://github.com/connorphee/league-app/issues) first to discuss your idea with the maintainer(s). After we've chatted things through, go ahead with your work and send over a PR.
 
 ## Branches
 Please create a feature branch with your changes in the format: `[fix/feature/etc]/[description]` -- this helps to gauge what the branch is for later on.
