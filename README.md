@@ -1,4 +1,4 @@
-# Welcome to my League of Legends stat tracker!
+# League of Legends stat tracker!
 
 
 > A simple website to track League of Legends stats. — https://league-stat-tracker.herokuapp.com/
@@ -7,9 +7,8 @@ This application is intended to allow League of Legends players to track statist
 
 If there is something this app does not currently support that you would like to see, please submit an issue and we will see what can be done!
 
-Please remember that the eventual goal of this app is to become approved by Riot games, the creator of League of Legends, so that we can leverage their APIs with granted keys, rather than temporary ones. When implementing any feature, try to remain aware of these policies and regulations:
+Please remember that the eventual goal of this app is to become approved by Riot games, the creator of League of Legends, so that we can leverage their APIs with granted keys, rather than temporary ones. When implementing any feature, try to remain aware of these [policies and regulations](https://developer.riotgames.com/policies.html).
 
-https://developer.riotgames.com/policies.html
 
 ## Current Features
 
@@ -19,7 +18,7 @@ https://developer.riotgames.com/policies.html
 ## How to install
 
 To install and run this app locally, follow these steps:
-* Install MongoDB locally https://docs.mongodb.com/manual/installation/
+* Install MongoDB locally ([installing guide](https://docs.mongodb.com/manual/installation/))
 * Fork the project
 * Clone the repository to your computer
 	 `git clone <your-github-account>/league-app`
@@ -35,10 +34,10 @@ To install and run this app locally, follow these steps:
 * Run `node app.js` and find the project in your browser at localhost:8000
 
 ## How to contribute
-Please see CONTRIBUTING.md
+Thank you for considering contributing to the League of Legends stat tracker, Please read our [contributing guide](CONTRIBUTING.md).
 
 If you think anything is missing from this doc, or would like to add something, please create an issue and let us know! We want to make contributing as easy and painless as possible!
 
 ## License
 
-League of Legends stat tracker is open-sourced software licensed under the [MIT License](LICENSE)
+League of Legends stat tracker is open-sourced software licensed under the [MIT License](LICENSE).
