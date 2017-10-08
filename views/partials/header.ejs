@@ -24,6 +24,7 @@
                 <% if(!currentUser){ %>
                     <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
                     <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
+                    <li class="<%= typeof page !== 'undefined' && page === 'reset' ? 'active' : '' %>"><a href="/reset">Reset</a></li>
                 <% } else { %>
                     <li><a href="/matches/new">Create new match</a></li>
                     <li><a href="/matches">Matches</a></li>
@@ -35,12 +36,12 @@
           </div>
       </div>
   </nav>
-  
+
   <div class="container">
      <% if(error && error.length > 0) { %>
        <div class="alert alert-danger"><p><%=error %></p></div>
      <% } %>
-     
+
      <% if(success && success.length > 0) { %>
        <div class="alert alert-success"><p><%= success %></p></div>
      <% } %>
