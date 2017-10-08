@@ -4,7 +4,6 @@ const express     = require("express"),
     mongoose    = require("mongoose"),
     passport    = require("passport"),
     cookieParser = require("cookie-parser"),
-    LocalStrategy = require("passport-local"),
     flash        = require("connect-flash"),
     session = require("express-session"),
     methodOverride = require("method-override");
