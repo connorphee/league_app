@@ -1,4 +1,4 @@
-# Welcome to my League of Legends stat tracker!
+# League of Legends stat tracker!
 
 
 > A simple website to track League of Legends stats. — https://league-stat-tracker.herokuapp.com/
@@ -7,9 +7,8 @@ This application is intended to allow League of Legends players to track statist
 
 If there is something this app does not currently support that you would like to see, please submit an issue and we will see what can be done!
 
-Please remember that the eventual goal of this app is to become approved by Riot games, the creator of League of Legends, so that we can leverage their APIs with granted keys, rather than temporary ones. When implementing any feature, try to remain aware of these policies and regulations:
+Please remember that the eventual goal of this app is to become approved by Riot games, the creator of League of Legends, so that we can leverage their APIs with granted keys, rather than temporary ones. When implementing any feature, try to remain aware of these [policies and regulations](https://developer.riotgames.com/policies.html).
 
-https://developer.riotgames.com/policies.html
 
 ## Current Features
 
@@ -19,7 +18,7 @@ https://developer.riotgames.com/policies.html
 ## How to install
 
 To install and run this app locally, follow these steps:
-* Install MongoDB locally https://docs.mongodb.com/manual/installation/
+* Install MongoDB locally ([installing guide](https://docs.mongodb.com/manual/installation/))
 * Fork the project
 * Clone the repository to your computer
 	 `git clone <your-github-account>/league-app`
@@ -35,30 +34,10 @@ To install and run this app locally, follow these steps:
 * Run `node app.js` and find the project in your browser at localhost:8000
 
 ## How to contribute
-Please see CONTRIBUTING.md
+Thank you for considering contributing to the League of Legends stat tracker, Please read our [contributing guide](CONTRIBUTING.md).
 
 If you think anything is missing from this doc, or would like to add something, please create an issue and let us know! We want to make contributing as easy and painless as possible!
 
 ## License
 
-MIT License
-
-Copyright (c) 2017 Connor Phee
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+League of Legends stat tracker is open-sourced software licensed under the [MIT License](LICENSE).
