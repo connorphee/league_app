@@ -1,12 +1,12 @@
-var express = require("express");
-var router  = express.Router({mergeParams: true});
-var Matchup = require('../models/matchup');
-var middleware = require("../middleware");
+import { default as express} from 'express';
+const router = express.Router({mergeParams: true});
+import { default as Matchup} from '../models/matchup';
+import { default as middleware} from '../middleware';
 
-router.get("/", middleware.isLoggedIn, function(req, res) {
-  Matchup.find({'username': req.user.username}, function (err, matchups) {
-    res.render("matchups/show",{matchups: matchups});
+router.get('/', middleware.isLoggedIn, (req, res) => {
+  Matchup.find({'username': req.user.username}, (err, matchups) => {
+    res.render('matchups/show',{matchups});
   })
 })
 
-module.exports = router;
+export default router;

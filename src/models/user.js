@@ -1,11 +1,12 @@
-var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
+import { default as mongoose } from 'mongoose';
+import { default as passportLocalMongoose } from 'passport-local-mongoose';
 
-var UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     username: String,
     password: String
 });
 
-UserSchema.plugin(passportLocalMongoose)
+UserSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model("User", UserSchema);
+/*eslint-disable */
+module.exports = mongoose.model('User', UserSchema);

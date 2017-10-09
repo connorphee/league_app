@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+import { default as mongoose } from'mongoose';
 
-var matchSchema = mongoose.Schema({
+const matchSchema = mongoose.Schema({
     champion: String,
     opponent: String,
     kills: Number,
@@ -12,10 +12,10 @@ var matchSchema = mongoose.Schema({
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: 'User'
         },
         username: String
     }
 });
 
-module.exports = mongoose.model("Match", matchSchema);
+export default matchSchema;

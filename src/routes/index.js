@@ -1,58 +1,57 @@
-var express = require("express");
-var router  = express.Router();
-var passport = require("passport");
-var User = require("../models/user");
+import { default as express } from 'express';
+const router  = express.Router();
+import { default as passport } from 'passport';
+
+/*eslint-disable */
+import { User } from '../models/user';
 
 //root route
-router.get("/", function(req, res){
+router.get('/', (req, res) =>{
     if (req.user) {
       res.redirect('/matches')
     } else {
-      res.render("landing");
+      res.render('landing');
     }
 });
 
 // show register form
-router.get("/register", function(req, res){
-   res.render("register", {page: 'register'}); 
+router.get('/register', (req, res) => {
+   res.render('register', {page: 'register'}); 
 });
 
 //handle sign up logic
-router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, function(err, user){
+router.post('/register', (req, res) =>  {
+    const newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, (err) => {
         if(err){
-            console.log(err);
-            return res.render("register", {error: err.message});
+            return res.render('register', {error: err.message});
         }
-        passport.authenticate("local")(req, res, function(){
-           req.flash("success", "Successfully Signed Up! Nice to meet you " + req.body.username);
-           res.redirect("/matches"); 
+        passport.authenticate('local')(req, res, () =>{
+           req.flash('success', 'Successfully Signed Up! Nice to meet you ' + req.body.username);
+           res.redirect('/matches'); 
         });
     });
 });
 
 //show login form
-router.get("/login", function(req, res){
-   res.render("login", {page: 'login'}); 
+router.get('/login', (req, res) => {
+   res.render('login', {page: 'login'}); 
 });
 
 //handling login logic
-router.post("/login", passport.authenticate("local", 
+router.post('/login', passport.authenticate('local', 
     {
-        successRedirect: "/matches",
-        failureRedirect: "/login",
+        successRedirect: '/matches',
+        failureRedirect: '/login',
         failureFlash: true,
         successFlash: 'Successfully logged in!'
-    }), function(req, res){
-});
+    }));
 
 // logout route
-router.get("/logout", function(req, res){
+router.get('/logout', (req, res) => {
    req.logout();
-   req.flash("success", "See you later!");
-   res.redirect("/");
+   req.flash('success', 'See you later!');
+   res.redirect('/');
 });
 
-
-module.exports = router;
+export default router;

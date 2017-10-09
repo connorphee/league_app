@@ -1,23 +1,23 @@
-var express = require("express");
-var router  = express.Router({mergeParams: true});
-var Match = require("../models/match");
-var Matchup = require('../models/matchup');
-var middleware = require("../middleware");
+import { default as express } from 'express';
+const router  = express.Router({mergeParams: true});
+import { default as Match } from '../models/match';
+import { default as Matchup } from '../models/matchup';
+import { default as middleware } from '../middleware';
 
-router.get("/new", middleware.isLoggedIn, function(req, res){
-   res.render("matches/new"); 
+router.get('/new', middleware.isLoggedIn, (req, res) => {
+   res.render('matches/new'); 
 });
 
-router.get("/", middleware.isLoggedIn, function(req, res) {
-  Match.find({'author.username': req.user.username}, function (err, matches) {
-    res.render("matches/show",{matches: matches});
+router.get('/', middleware.isLoggedIn, (req, res) => {
+  Match.find({'author.username': req.user.username}, (err, matches) => {
+    res.render('matches/show',{matches});
   })
 })
 
-router.post("/", middleware.isLoggedIn, function(req, res){
-  Match.create(req.body.match, function(err, match){
+router.post('/', middleware.isLoggedIn, (req, res) => {
+  Match.create(req.body.match, (err, match) => {
     if(err){
-      console.log(err);
+      // Add logging
     } else {
       const info = req;
       const matchup = info.body.champion.toUpperCase() + 'V' + info.body.opponent.toUpperCase();
@@ -61,7 +61,7 @@ function buildMatchupObject (matchup, values) {
 }
 
 function updateMatchup (username, matchup, values) {
-  Matchup.findOne({matchup : matchup, username : username}, function(err, document) {
+  Matchup.findOne({matchup, username}, (err, document) => {
     if (document) {
       document.gameCount++;
       values.body.result === 'W' ? document.wins++ :  document.losses++;
@@ -70,7 +70,7 @@ function updateMatchup (username, matchup, values) {
       document.assists += parseInt(values.body.assists);
       document.save();
     } else {
-      Matchup.create({"name": "hello"}, function(err, document) {
+      Matchup.create({'name': 'hello'}, (err, document) => {
         if (err) throw err;
         buildMatchupObject(document, values);
         document.matchup = matchup;
@@ -80,4 +80,4 @@ function updateMatchup (username, matchup, values) {
   });
 }
 
-module.exports = router;
+export default router;

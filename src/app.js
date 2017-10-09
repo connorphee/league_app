@@ -1,38 +1,44 @@
-const express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    passport    = require("passport"),
-    cookieParser = require("cookie-parser"),
-    LocalStrategy = require("passport-local"),
-    flash        = require("connect-flash"),
-    session = require("express-session"),
-    methodOverride = require("method-override");
+import { default as express } from 'express';
+const app = express();
+import { default as bodyParser } from 'body-parser';
+import { default as mongoose } from 'mongoose';
+import { default as passport } from 'passport';
+import { default as cookieParser } from 'cookie-parser';
+import { default as LocalStrategy } from 'passport-local';
+import { default as flash } from 'connect-flash';
+import { default as session } from 'express-session';
+import { default as methodOverride } from 'method-override';
+
+/*eslint-disable */
+import { default as path } from 'path';
+
 // configure dotenv
-require('dotenv').load();
+import { default as dotenv } from 'dotenv';
+dotenv.load();
+
 
 // Models
-const User = require('./models/user');
-const Match = require('./models/match');
-const Matchup = require('./models/matchup');
+import { User } from './models/user';
+import { default as Match } from './models/match';
+import { default as Matchup } from './models/matchup';
 
-const   matchRoutes = require("./routes/matches"),
-        indexRoutes      = require("./routes/index"),
-        matchupRoutes = require("./routes/matchups");
+import { default as matchRoutes } from './routes/matches';
+import { default as indexRoutes } from './routes/index';
+import { default as matchupRoutes } from './routes/matchups';
     
 mongoose.connect(process.env.DB_URL);
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.set("views", __dirname + "/views");
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(methodOverride('_method'));
 app.use(cookieParser('secret'));
 
 app.locals.moment = require('moment');
 
-app.use(require("express-session")({
+app.use(session({
     secret: 'Every person you meet knows something you don\'t',
     resave: false,
     saveUninitialized: false,
@@ -53,12 +59,10 @@ app.use(function(req, res, next){
    next();
 });
 
-app.use("/", indexRoutes);
-app.use("/matches", matchRoutes);
-app.use("/matchups", matchupRoutes);
+app.use('/', indexRoutes);
+app.use('/matches', matchRoutes);
+app.use('/matchups', matchupRoutes);
 
 var port = process.env.PORT || 8000
 
-app.listen(port, function() {
-    console.log("App is running on port " + port);
-});
+app.listen(port);

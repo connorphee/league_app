@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+import { default as mongoose } from 'mongoose';
 
-var matchupSchema = mongoose.Schema({
+const matchupSchema = mongoose.Schema({
     matchup: String,
     champion: String,
     opponent: String,
@@ -14,4 +14,4 @@ var matchupSchema = mongoose.Schema({
     gameCount: Number
 });
 
-module.exports = mongoose.model("Matchup", matchupSchema);
+export default matchupSchema;
