@@ -1,0 +1,7 @@
+{
+    "env": { "es6": true },
+    "rules": {
+        "import/no-nodejs-modules": 0
+    },
+    "extends": ["node"]
+}
