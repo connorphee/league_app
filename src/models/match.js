@@ -1,4 +1,4 @@
-import { default as mongoose } from'mongoose';
+import mongoose from'mongoose';
 
 const matchSchema = mongoose.Schema({
     champion: String,
@@ -18,4 +18,6 @@ const matchSchema = mongoose.Schema({
     }
 });
 
-export default matchSchema;
+const Match = mongoose.model('Match', matchSchema);
+
+export default Match;

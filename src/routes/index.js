@@ -1,9 +1,7 @@
-import { default as express } from 'express';
+import express from 'express';
 const router  = express.Router();
-import { default as passport } from 'passport';
-
-/*eslint-disable */
-import { User } from '../models/user';
+import passport from 'passport';
+import User from '../models/user';
 
 //root route
 router.get('/', (req, res) =>{

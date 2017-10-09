@@ -1,7 +1,7 @@
-import { default as express } from 'express';
+import express from 'express';
 const app = express();
-import { default as bodyParser } from 'body-parser';
-import { default as mongoose } from 'mongoose';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 import { default as passport } from 'passport';
 import { default as cookieParser } from 'cookie-parser';
 import { default as LocalStrategy } from 'passport-local';
@@ -9,22 +9,18 @@ import { default as flash } from 'connect-flash';
 import { default as session } from 'express-session';
 import { default as methodOverride } from 'method-override';
 
-/*eslint-disable */
-import { default as path } from 'path';
+import path from 'path';
 
 // configure dotenv
-import { default as dotenv } from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.load();
 
-
 // Models
-import { User } from './models/user';
-import { default as Match } from './models/match';
-import { default as Matchup } from './models/matchup';
+import User from './models/user';
 
-import { default as matchRoutes } from './routes/matches';
-import { default as indexRoutes } from './routes/index';
-import { default as matchupRoutes } from './routes/matchups';
+import matchRoutes from './routes/matches';
+import indexRoutes from './routes/index';
+import matchupRoutes from './routes/matchups';
     
 mongoose.connect(process.env.DB_URL);
 
@@ -36,7 +32,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(methodOverride('_method'));
 app.use(cookieParser('secret'));
 
-app.locals.moment = require('moment');
+import moment from 'moment';
+app.locals.moment = moment;
 
 app.use(session({
     secret: 'Every person you meet knows something you don\'t',
@@ -52,7 +49,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req, res, next){
+app.use((req, res, next) => {
    res.locals.currentUser = req.user;
    res.locals.success = req.flash('success');
    res.locals.error = req.flash('error');
@@ -63,6 +60,6 @@ app.use('/', indexRoutes);
 app.use('/matches', matchRoutes);
 app.use('/matchups', matchupRoutes);
 
-var port = process.env.PORT || 8000
+const port = process.env.PORT || 8000;
 
 app.listen(port);

@@ -1,5 +1,5 @@
-import { default as mongoose } from 'mongoose';
-import { default as passportLocalMongoose } from 'passport-local-mongoose';
+import mongoose from 'mongoose';
+import passportLocalMongoose from 'passport-local-mongoose';
 
 const UserSchema = new mongoose.Schema({
     username: String,
@@ -8,5 +8,6 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(passportLocalMongoose);
 
-/*eslint-disable */
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+
+export default User;

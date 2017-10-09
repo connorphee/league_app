@@ -1,8 +1,8 @@
-import { default as express } from 'express';
+import express from 'express';
 const router  = express.Router({mergeParams: true});
-import { default as Match } from '../models/match';
-import { default as Matchup } from '../models/matchup';
-import { default as middleware } from '../middleware';
+import Match from '../models/match';
+import Matchup from '../models/matchup';
+import middleware from '../middleware';
 
 router.get('/new', middleware.isLoggedIn, (req, res) => {
    res.render('matches/new'); 
@@ -12,7 +12,7 @@ router.get('/', middleware.isLoggedIn, (req, res) => {
   Match.find({'author.username': req.user.username}, (err, matches) => {
     res.render('matches/show',{matches});
   })
-})
+});
 
 router.post('/', middleware.isLoggedIn, (req, res) => {
   Match.create(req.body.match, (err, match) => {

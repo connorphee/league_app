@@ -1,5 +1,5 @@
-import { default as Match } from '../models/match';
-const toExport  = {
+import Match from '../models/match';
+const middleware  = {
     isLoggedIn: (req, res, next) => {
         if(req.isAuthenticated()){
             return next();
@@ -24,4 +24,4 @@ const toExport  = {
     }
 };
 
-export default toExport;
+export default middleware;

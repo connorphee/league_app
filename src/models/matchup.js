@@ -1,4 +1,4 @@
-import { default as mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 
 const matchupSchema = mongoose.Schema({
     matchup: String,
@@ -14,4 +14,6 @@ const matchupSchema = mongoose.Schema({
     gameCount: Number
 });
 
-export default matchupSchema;
+const Matchup = mongoose.model('Matchup', matchupSchema);
+
+export default Matchup;
