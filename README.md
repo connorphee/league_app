@@ -1,4 +1,4 @@
-# League of Legends stat tracker!
+# LolProData!
 
 
 > A simple website to track League of Legends stats. — https://league-stat-tracker.herokuapp.com/
