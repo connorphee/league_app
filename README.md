@@ -1,6 +1,5 @@
 # League of Legends stat tracker!
 
-
 > A simple website to track League of Legends stats. — https://league-stat-tracker.herokuapp.com/
 
 This application is intended to allow League of Legends players to track statistics for their gameplay, allowing them to improve their level of play by understanding at a deeper level what helps them succeed or causes them to fail. While there are some sites out there that allow for this already, this project is intended to be very user driven, to offer whatever is requested, and reasonable.
@@ -22,9 +21,9 @@ To install and run this app locally, follow these steps:
 * Fork the project
 * Clone the repository to your computer
 	 `git clone <your-github-account>/league-app`
-* Move directories into your local copy of the project 
+* Move directories into your local copy of the project
 	`cd league-app`
-* Install dependencies 
+* Install dependencies
 	`npm i`
 * In the app.js file there is a line of code:
 	`mongoose.connect(process.env.DB_URL);`
