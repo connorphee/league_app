@@ -11,6 +11,10 @@ Please [create an issue](https://github.com/connorphee/league-app/issues) first 
 ## Branches
 Please create a feature branch with your changes in the format: `[fix/feature/etc]/[description]` -- this helps to gauge what the branch is for later on.
 
+## Prior To Submitting PR
+Please run this command and be sure that your feature branch passes this prior to submitting the PR. No PR's will be merged or considered if this command does not pass.
+`npm run eslint`
+
 
 ### How to install
 
