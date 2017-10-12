@@ -19,16 +19,21 @@ router.get('/register', (req, res) => {
 
 //handle sign up logic
 router.post('/register', (req, res) =>  {
-    const newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, (err) => {
-        if(err){
-            return res.render('register', {error: err.message});
-        }
-        passport.authenticate('local')(req, res, () =>{
-           req.flash('success', 'Successfully Signed Up! Nice to meet you ' + req.body.username);
-           res.redirect('/matches'); 
-        });
+  const newUser = new User({
+    username: req.body.username,
+    email:    req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName
+  });
+  User.register(newUser, req.body.password, (err) => {
+    if(err){
+      return res.render('register', {error: err.message});
+    }
+    passport.authenticate('local')(req, res, () =>{
+      req.flash('success', 'Successfully Signed Up! Nice to meet you ' + req.body.username);
+      res.redirect('/matches'); 
     });
+  });
 });
 
 //show login form

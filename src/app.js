@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import { default as passport } from 'passport';
 import { default as cookieParser } from 'cookie-parser';
-import { default as LocalStrategy } from 'passport-local';
 import { default as flash } from 'connect-flash';
 import { default as session } from 'express-session';
 import { default as methodOverride } from 'method-override';
@@ -45,7 +44,7 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
