@@ -21,7 +21,7 @@ import matchRoutes from './routes/matches';
 import indexRoutes from './routes/index';
 import matchupRoutes from './routes/matchups';
     
-mongoose.connect(process.env.DB_URL);
+mongoose.connect(process.env.DB_URL || "localhost:27017");
 
 app.use(bodyParser.urlencoded({extended: true}));
 

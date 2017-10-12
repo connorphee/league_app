@@ -27,7 +27,11 @@ router.post('/register', (req, res) =>  {
   });
   User.register(newUser, req.body.password, (err) => {
     if(err){
-      return res.render('register', {error: err.message});
+        let errorMsg = err.message;
+        if (err.errors.username !== null || err.errors.email !== null) {
+            errorMsg = "A user with the given username or email already exists";
+        }
+      return res.render('register', {error: errorMsg});
     }
     passport.authenticate('local')(req, res, () =>{
       req.flash('success', 'Successfully Signed Up! Nice to meet you ' + req.body.username);
