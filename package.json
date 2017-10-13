@@ -16,6 +16,8 @@
   "author": "Connor Phee",
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
@@ -35,8 +37,5 @@
     "passport-local-mongoose": "^3.1.0",
     "request": "^2.65.0"
   },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.5.1"
-  }
+  "devDependencies": {}
 }
