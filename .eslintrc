@@ -1,7 +1,11 @@
 {
     "env": { "es6": true },
     "rules": {
-        "import/no-nodejs-modules": 0
+        "import/no-nodejs-modules": 0,
+        "prettier/prettier": "error"
     },
+    "plugins": [
+        "prettier"
+    ],
     "extends": ["node"]
 }
