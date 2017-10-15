@@ -3,9 +3,10 @@ const router  = express.Router({mergeParams: true});
 import Match from '../models/match';
 import Matchup from '../models/matchup';
 import middleware from '../middleware';
+import fetch from 'node-fetch';
 
 router.get('/new', middleware.isLoggedIn, (req, res) => {
-   res.render('matches/new'); 
+   res.render('matches/new');
 });
 
 router.get('/', middleware.isLoggedIn, (req, res) => {
@@ -31,6 +32,23 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
     }
   });
 });
+
+router.post('/id', middleware.isLoggedIn, (req, res) => {
+  console.log(req.body.match);
+  /*
+  curl --request GET 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/RiotSchmick?api_key=<key>' --include
+  */
+  fetch(`https://na1.api.riotgames.com/lol/match/v3/timelines/by-match/${req.body.match}?api_key=${process.env.RIOT_KEY}`,
+    { method: 'GET'})
+  .then((res)=>{
+    return res.json();
+  }).then(function(json) {
+    console.log(json);
+  });
+
+  res.redirect('/');
+});
+
 
 function buildMatchObject (match, values) {
   match.author.id = values.user._id;

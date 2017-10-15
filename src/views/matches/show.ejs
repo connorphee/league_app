@@ -13,6 +13,19 @@
       <td><%= matches[i].assists %></td>
       <td><%= matches[i].build %></td>
       <td><%= matches[i].result %></td>
-    </tr>    
+    </tr>
    <% } %>
 </table>
+
+ <form action="/matches/id" method="POST">
+
+  <div class="form-group">
+    <div class="form-group">
+      <label for="match">Match Id</label>
+      <input class="form-control" type="text" name="match" id="match" placeholder="XXXX XXX XXX" required>
+    </div>
+  </div>
+  <div class="form-group">
+      <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+  </div>
+</form>
