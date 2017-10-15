@@ -22,16 +22,16 @@ To install and run this app locally, follow these steps:
 * Fork the project
 * Clone the repository to your computer
 	 `git clone <your-github-account>/league-app`
-* Move directories into your local copy of the project 
+* Move directories into your local copy of the project
 	`cd league-app`
-* Install dependencies 
+* Install dependencies
 	`npm i`
 * In the app.js file there is a line of code:
 	`mongoose.connect(process.env.DB_URL);`
   This is how the project establishes a connection with a DB. You must create a file named `.env` at the
   root of the project and create a variable named process.env.DB_URL and assign it a value:
   `DB_URL=mongodb://<your-local-mongo-uri>/league-app`
-* Run `node app.js` and find the project in your browser at localhost:8000
+* Run `npm start` in root folder then find the project in your browser at localhost:8000
 
 ## How to contribute
 Thank you for considering contributing to the League of Legends stat tracker, Please read our [contributing guide](CONTRIBUTING.md).
