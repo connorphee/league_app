@@ -34,16 +34,33 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 });
 
 router.post('/id', middleware.isLoggedIn, (req, res) => {
-  console.log(req.body.match);
+  // console.log(req.body.match);
   /*
   curl --request GET 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/RiotSchmick?api_key=<key>' --include
+  testing matchId: 2585563902
   */
-  fetch(`https://na1.api.riotgames.com/lol/match/v3/timelines/by-match/${req.body.match}?api_key=${process.env.RIOT_KEY}`,
+  var hero_sel=[];
+  fetch( "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json")
+  .then((response)=> { return response.json(); })
+  .then((data)=> {
+    console.log("Hit");
+    var champs = data.data
+    for (var champ in champs){
+      var champion = champs[champ]
+      // if(champs[key].key == '1')
+        hero_sel.push({[champion.key]: champs[champ]})
+    }
+    // console.log(hero_sel);
+  })
+  .catch(function () {
+     console.log("Promise Rejected");
+    });
+  fetch(`https://na1.api.riotgames.com/lol/match/v3/matches/${req.body.match}?api_key=${process.env.RIOT_KEY}`,
     { method: 'GET'})
   .then((res)=>{
     return res.json();
   }).then(function(json) {
-    console.log(json);
+    console.log(json.participantIdentities);
   });
 
   res.redirect('/');
