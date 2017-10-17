@@ -40,7 +40,7 @@ app.locals.moment = moment;
 
 app.use(
   session({
-    secret: 'Every person you meet knows something you don"t',
+    secret: "Every person you meet knows something you don't",
     resave: false,
     saveUninitialized: false,
     cookie: { _expires: 600000 }
