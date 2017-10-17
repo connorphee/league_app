@@ -13,7 +13,7 @@ const middleware = {
         if (match.author.id.equals(req.user._id)) {
           next();
         } else {
-          req.flash("error", 'You don"t have permission to do that!');
+          req.flash("error", "You don't have permission to do that!");
           res.redirect("/" + req.params.id);
         }
       });
