@@ -1,11 +1,12 @@
-import express from "express";
-const router = express.Router({ mergeParams: true });
-import Match from "../models/match";
-import Matchup from "../models/matchup";
-import middleware from "../middleware";
+import express from 'express';
+const router  = express.Router({mergeParams: true});
+import Match from '../models/match';
+import Matchup from '../models/matchup';
+import middleware from '../middleware';
+import fetch from 'node-fetch';
 
-router.get("/new", middleware.isLoggedIn, (req, res) => {
-  res.render("matches/new");
+router.get('/new', middleware.isLoggedIn, (req, res) => {
+   res.render('matches/new');
 });
 
 router.get("/", middleware.isLoggedIn, (req, res) => {
@@ -35,7 +36,110 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
   });
 });
 
-function buildMatchObject(match, values) {
+// GET ALL GAME MATCHES FROM ONE ACCOUNT
+router.post('/id', middleware.isLoggedIn, (req, res) => {
+  var items = {};
+  var teams = {};
+  var match_arr = [];
+  var hero_sel={};
+  var outcome = {};
+  var players = {};
+  //First get all champs and items from public site hosted as .json file
+  fetch ('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/item.json')
+  .then((response)=>{return response.json(); })
+  .then((data)=>{
+    // console.log(data);
+    for(var key in data){
+      items[key] = data[key].name;
+    }
+    console.log(items);
+  })
+  fetch( "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json")
+  .then((response)=> { return response.json(); })
+  .then((data)=> {
+    var champs = data.data
+    for (var champ in champs){
+      var champion = champs[champ]
+      //Set as object to take advantage of key accessor
+      hero_sel[champion.key]= champs[champ].name;
+    }
+  })
+  .catch(function () {
+     console.log("Promise Rejected");
+    });
+
+  fetch(`https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/${req.body.name}?api_key=${process.env.RIOT_KEY}`,
+    { method: 'GET'})
+  .then((res)=>{
+    return res.json();
+  }).then(function(json) {
+    return json.accountId;
+  })
+  .then((id)=>{
+    fetch(`https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/${id}/recent?api_key=${process.env.RIOT_KEY}`,{method:'GET'})
+    .then((matches)=>{
+      return matches.json();
+    })
+    .then((data) =>{
+      data.matches.map((match)=>{
+        // Comment out line below, and line above with associated brackets to test one match at a time
+        // var match = data.matches[0];
+        fetch(`https://na1.api.riotgames.com/lol/match/v3/matches/${match.gameId}?api_key=${process.env.RIOT_KEY}`,{method:'GET'})
+        .then((match_data)=>{
+          return(match_data.json());
+        })
+        .then((final)=>{
+          final.teams.map((winner)=>{
+            outcome[winner.teamId] = {};
+            outcome[winner.teamId] = winner.win;
+          })
+          final.participantIdentities.map((user)=>{
+            players[user.participantId] = user.player.summonerName
+          })
+          final.participants.map((user_stats)=>{
+            var stats = user_stats.stats;
+            if(!teams[user_stats.teamId]){
+              teams[user_stats.teamId] = [];
+            }
+            teams[user_stats.teamId].push(
+              {
+                "summonerNme": players[user_stats.participantId],
+                "champion": hero_sel[user_stats.championId],
+                "stats":{
+                  kills: stats.kills,
+                  deaths: stats.deaths,
+                  assists: stats.assists,
+                  build:
+                    [
+                      items[stats.item0],
+                      items[stats.item1],
+                      items[stats.item2],
+                      items[stats.item3],
+                      items[stats.item4],
+                      items[stats.item5],
+                      items[stats.item6]
+                      ],
+                "win": outcome[user_stats.teamId],
+                }
+              })
+            }
+          );
+          match_arr.push(teams);
+          teams = {}
+          // console.log(match_arr[0]['100']);
+          return match_arr
+        })
+      });
+    });
+  })
+  .then((matches)=>{
+    res.render("matches/show", { matches });
+  });
+
+});
+
+
+function buildMatchObject (match, values) {
   match.author.id = values.user._id;
   match.author.username = values.user.username;
   match.champion = values.body.champion;
