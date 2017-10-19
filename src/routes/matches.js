@@ -38,12 +38,22 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 
 // GET ALL GAME MATCHES FROM ONE ACCOUNT
 router.post('/id', middleware.isLoggedIn, (req, res) => {
+  var items = {};
   var teams = {};
   var match_arr = [];
   var hero_sel={};
   var outcome = {};
   var players = {};
-  //First get all champs from public site hosted as .json file
+  //First get all champs and items from public site hosted as .json file
+  fetch ('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/item.json')
+  .then((response)=>{return response.json(); })
+  .then((data)=>{
+    // console.log(data);
+    for(var key in data){
+      items[key] = data[key].name;
+    }
+    console.log(items);
+  })
   fetch( "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json")
   .then((response)=> { return response.json(); })
   .then((data)=> {
@@ -71,8 +81,9 @@ router.post('/id', middleware.isLoggedIn, (req, res) => {
       return matches.json();
     })
     .then((data) =>{
-      // data.matches.map((match)=>{
-        var match = data.matches[0];
+      data.matches.map((match)=>{
+        // Comment out line below, and line above with associated brackets to test one match at a time
+        // var match = data.matches[0];
         fetch(`https://na1.api.riotgames.com/lol/match/v3/matches/${match.gameId}?api_key=${process.env.RIOT_KEY}`,{method:'GET'})
         .then((match_data)=>{
           return(match_data.json());
@@ -96,10 +107,18 @@ router.post('/id', middleware.isLoggedIn, (req, res) => {
                 "champion": hero_sel[user_stats.championId],
                 "stats":{
                   kills: stats.kills,
-                  deaths: stats.kills,
+                  deaths: stats.deaths,
                   assists: stats.assists,
                   build:
-                    [stats.item0, stats.item1, stats.item2, stats.item3, stats.item4, stats.item5, stats.item6],
+                    [
+                      items[stats.item0],
+                      items[stats.item1],
+                      items[stats.item2],
+                      items[stats.item3],
+                      items[stats.item4],
+                      items[stats.item5],
+                      items[stats.item6]
+                      ],
                 "win": outcome[user_stats.teamId],
                 }
               })
@@ -107,10 +126,10 @@ router.post('/id', middleware.isLoggedIn, (req, res) => {
           );
           match_arr.push(teams);
           teams = {}
-          console.log(match_arr[0]['100']);
+          // console.log(match_arr[0]['100']);
           return match_arr
         })
-      // })
+      });
     });
   })
   .then((matches)=>{
