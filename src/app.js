@@ -10,10 +10,6 @@ import methodOverride from "method-override";
 
 import path from "path";
 
-// configure dotenv
-import dotenv from "dotenv";
-dotenv.load();
-
 // Models
 import User from "./models/user";
 
@@ -23,7 +19,7 @@ import matchupRoutes from "./routes/matchups";
 
 // Use native promises
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DB_URL || "mongodb://localhost/league_app", {
+mongoose.connect("mongodb://mongo:27017/league_app", {
   useMongoClient: true
 });
 
@@ -65,6 +61,4 @@ app.use("/", indexRoutes);
 app.use("/matches", matchRoutes);
 app.use("/matchups", matchupRoutes);
 
-const port = process.env.PORT || 8000;
-
-app.listen(port);
+app.listen(8080);
