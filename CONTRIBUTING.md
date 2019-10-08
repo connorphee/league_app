@@ -35,4 +35,11 @@ To install and run this app locally, follow these steps:
 * Run `node app.js` and find the project in your browser at localhost:8000
 and see the project at localhost:8000 in your browser.
 
+### Creating a PR on GitHub 
+
+To create a new pull request in your browser, follow these steps: 
+* Fork the project, it will authomatically open your forked project after you click "Fork" (top right of the page). 
+* Open the relevant file, click edit, and make your changes. When you are done, click "Commit" at the bottom of the page. 
+* Switch to the tab Pull Requests, and create a New Pull Request. Add a comment to describe your changes, and submit by clicking Create Pull Request. 
+
 If you think anything is missing from this doc, or would like to add something, please create an issue and let us know! We want to make contributing as easy and painless as possible!
