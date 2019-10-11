@@ -1,0 +1,23 @@
+version: "3"
+services:
+  mongoserver:
+    container_name: mongoserver
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - league-network
+
+  leagueapp:
+    build: .
+    ports:
+      - "8001:8000"
+    environment:
+      - DB_URL=mongodb://mongoserver:27017/league-app
+    links:
+      - mongoserver
+    networks:
+      - league-network
+
+networks:
+  league-network:
