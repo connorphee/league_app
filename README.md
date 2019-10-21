@@ -41,3 +41,5 @@ If you think anything is missing from this doc, or would like to add something, 
 ## License
 
 League of Legends stat tracker is open-sourced software licensed under the [MIT License](LICENSE).
+
+Thank You.
