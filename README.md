@@ -1,7 +1,7 @@
 # League of Legends stat tracker!
 
 
-> A simple website to track League of Legends stats. — https://league-stat-tracker.herokuapp.com/
+> A simple, but an Amazing and very Useful website to track League of Legends stats. — https://league-stat-tracker.herokuapp.com/
 
 This application is intended to allow League of Legends players to track statistics for their gameplay, allowing them to improve their level of play by understanding at a deeper level what helps them succeed or causes them to fail. While there are some sites out there that allow for this already, this project is intended to be very user driven, to offer whatever is requested, and reasonable.
 
